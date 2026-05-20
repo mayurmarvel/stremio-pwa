@@ -10,6 +10,8 @@ permissions:
 
 jobs:
   cleanup:
+    # Root deploy on mayurmarvel/stremio-pwa uses commit-hash dirs at gh-pages root; skip cleanup there
+    if: github.repository != 'mayurmarvel/stremio-pwa'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

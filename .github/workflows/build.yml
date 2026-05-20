@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - development
+      - deploy/fork-pages-root
     tags-ignore:
       - "**"
   pull_request:
@@ -50,5 +51,6 @@ jobs:
           publish_dir: ./build
           # in stremio, we use `feat/features-name` or `fix/this-bug`
           # so we need a recursive creation of the destination dir
-          destination_dir: ${{ github.head_ref || github.ref_name }}
+          # Fork mayurmarvel/stremio-pwa: deploy to site root for a short tester URL
+          destination_dir: ${{ github.repository == 'mayurmarvel/stremio-pwa' && '.' || (github.head_ref || github.ref_name) }}
           allow_empty_commit: true
